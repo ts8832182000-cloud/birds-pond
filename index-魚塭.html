@@ -1,0 +1,202 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>魚塭水鳥互動圖</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; background:#f4f6f8; }
+    .wrap { width: min(1100px, 96vw); margin: 22px auto 40px; }
+
+    .pond {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1542 / 2048;
+      border-radius: 18px;
+      overflow: hidden;
+      background: url("./pond.jpg") center / cover no-repeat;
+      box-shadow: 0 10px 30px rgba(0,0,0,.14);
+    }
+
+    /* 熱點：你可以先開 outline 找位置，完成後再關掉 */
+    .hotspot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      /* outline: 2px dashed rgba(255,255,255,.8); */
+    }
+
+    .dot {
+      position:absolute; inset:0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.6);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.18);
+      transition: transform .15s ease;
+    }
+    .hotspot:hover .dot { transform: scale(1.06); }
+
+    /* tooltip 卡片 */
+    .tooltip {
+      position: absolute;
+      left: 30px; top: -340px;
+      min-width: 320px;
+      max-width: 420px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      background: rgba(18, 22, 28, .90);
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .15s ease, transform .15s ease;
+      pointer-events: none; /* 避免滑到卡片造成抖動 */
+    }
+
+    .hotspot:hover .tooltip,
+    .hotspot[data-open="1"] .tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .name { font-weight: 800; font-size: 15px; margin-bottom: 6px; }
+    .meta { opacity: .92; }
+    .tag {
+      display:inline-block;
+      margin-top: 8px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      font-size: 12px;
+    }
+
+.bird-photo {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 8px 0 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+}
+
+    /* 小螢幕 tooltip 往上/往左一點比較不會擋住 */
+    @media (max-width: 560px){
+      .hotspot { width: 54px; height: 54px; }
+      .tooltip { left: -10px; top: -120px; }
+    }
+
+    h1 { font-size: 18px; margin: 0 0 10px; color:#111; }
+    p { margin: 0 0 14px; color:#333; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>七股鳥類價值圖鑑_魚塭篇（滑鼠靠近看介紹／手機點一下）</h1>
+    <p>提示：手機上可點鳥的圓點開/關資訊卡。</p>
+
+    <div class="pond" id="pond">
+
+      <!-- 高蹺鴴：中間紅腳那隻（約 x=46.0%, y=75.1%） -->
+      <div class="hotspot"
+           style="left:46.04%; top:81.05%;"
+           data-bird="高蹺鴴">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="tooltip" role="tooltip">
+          <div class="name">高蹺鴴（Black-winged Stilt）</div>
+<img src="./stilt.jpg" alt="高蹺鴴外型特徵" class="bird-photo" />
+          <div class="meta">
+            特徵：超長紅腿、黑白身、細長嘴。<br/>
+            棲地：魚塭、鹽田、淺水濕地。<br/>
+            行為：在淺水中緩步覓食小魚、昆蟲、甲殼類。
+            生態價值：魚塭淺水區的「健康指標鳥」<br/>
+            🦐 控制小型生物數量<br/>
+               以小魚、昆蟲幼蟲、甲殼類為食，避免某些物種過度爆發<br/>
+            🌊 高度依賴淺水環境<br/>
+               需要「水不深、不濁、不被完全乾涸」的魚塭<br/>
+               → 出現代表水位管理得宜<br/>
+            🚨 對干擾很敏感<br/>
+               人為活動太頻繁、水質太差，牠們會直接離開<br/>
+          </div>
+          <div class="tag">辨識：紅腿是招牌</div>
+        </div>
+      </div>
+
+      <!-- 反嘴鴴：後方黑白相間那隻（約 x=44.1%, y=76.2%） -->
+      <div class="hotspot"
+           style="left:44.10%; top:76.17%;"
+           data-bird="反嘴鴴">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="tooltip" role="tooltip">
+          <div class="name">反嘴鴴（Pied Avocet）</div>
+<img src="./avocet.jpg" alt="反嘴鴴上翹嘴型" class="bird-photo" />
+          <div class="meta">
+            特徵：黑白羽色、嘴向上翹（上翹弧形）。<br/>
+            棲地：潮間帶、鹽田、魚塭淺灘。<br/>
+            行為：常左右掃水「濾食」小型無脊椎。<br/>
+            生態價值：濕地的「水質與底泥檢測員」<br/>
+                      🌊 濾食高手<br/>
+                         用上翹的嘴在水中左右掃，吃浮游生物、小型無脊椎<br/>
+                      💧 對水質很挑<br/>
+                         水太髒、污染重，食物結構改變，牠們會消失<br/>
+                      🗺️ 國際遷徙物種<br/>
+                         出現代表這塊魚塭「接得上東亞—澳洲遷徙線」<br/>
+          </div>
+          <div class="tag">辨識：上翹嘴</div>
+        </div>
+      </div>
+
+      <!-- 反嘴鷸：右邊小隻那隻（約 x=54.5%, y=77.6%） -->
+      <div class="hotspot"
+           style="left:54.47%; top:77.64%;"
+           data-bird="反嘴鷸">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="tooltip" role="tooltip">
+          <div class="name">反嘴鷸（Terek Sandpiper）</div>
+<img src="./sandpiper.jpg" alt="反嘴鷸體型與嘴型" class="bird-photo" />
+          <div class="meta">
+            特徵：體型較小、嘴微微上翹、腳偏黃。<br/>
+            棲地：泥灘、潟湖、魚塭邊緣。<br/>
+            行為：常快走追逐覓食，吃小蟲、螃蟹幼體等。<br/>
+            生態價值：濕地邊緣的「動態巡邏員」<br/>
+                      🏃‍ 行為很活躍<br/>
+                         會快走、追逐獵物，捕食小螃蟹、昆蟲<br/>
+                      🍽 補上生態縫隙<br/>
+                         專吃其他大型鳥較少碰的獵物，減少競爭<br/>
+                      🌏 長距離遷徙者<br/>
+                         願意停下來，表示魚塭「安全、食物夠」<br/>
+          </div>
+          <div class="tag">辨識：小隻、微上翹嘴</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // 手機/觸控：點一下開 tooltip，再點其他地方關掉
+    const pond = document.getElementById("pond");
+    const hotspots = [...pond.querySelectorAll(".hotspot")];
+
+    function closeAll() {
+      hotspots.forEach(h => h.dataset.open = "0");
+    }
+
+    hotspots.forEach(h => {
+      h.dataset.open = "0";
+      h.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = h.dataset.open === "1";
+        closeAll();
+        h.dataset.open = isOpen ? "0" : "1";
+      });
+    });
+
+    document.addEventListener("click", closeAll);
+  </script>
+</body>
+</html>

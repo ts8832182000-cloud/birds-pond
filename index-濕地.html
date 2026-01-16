@@ -1,0 +1,204 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>七股魚塭水鴨辨識互動圖</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; background:#f4f6f8; }
+    .wrap { width: min(1100px, 96vw); margin: 22px auto 40px; }
+    h1 { font-size: 18px; margin: 0 0 10px; color:#111; }
+    p { margin: 0 0 14px; color:#333; line-height: 1.5; }
+
+    .pond {
+      position: relative;
+      width: 100%;
+      /* 這張新圖是橫幅，用 3/2 略接近；若你想更精準可再改 */
+      aspect-ratio: 3 / 2;
+      border-radius: 18px;
+      overflow: hidden;
+      background: url("./wetland.jpg") center / cover no-repeat;
+      box-shadow: 0 10px 30px rgba(0,0,0,.14);
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      /* outline: 2px dashed rgba(255,255,255,.8); */
+    }
+
+    .dot {
+      position:absolute; inset:0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.65);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 8px 18px rgba(0,0,0,.18);
+      transition: transform .15s ease;
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 800;
+      color: rgba(255,255,255,.95);
+      text-shadow: 0 2px 8px rgba(0,0,0,.35);
+      user-select: none;
+    }
+    .hotspot:hover .dot { transform: scale(1.07); }
+
+    .tooltip {
+      position: absolute;
+      left: 10px; top: 200px;
+      min-width: 420px;
+      max-width: 520px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(18, 22, 28, .90);
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.55;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .15s ease, transform .15s ease;
+      pointer-events: none;
+    }
+    .hotspot:hover .tooltip,
+    .hotspot[data-open="1"] .tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .name { font-weight: 900; font-size: 15px; margin-bottom: 6px; }
+    .meta { opacity: .95; }
+    .hint { margin-top: 8px; opacity:.92; }
+    .tag {
+      display:inline-block;
+      margin-top: 10px;
+      margin-right: 6px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+.bird-photo {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 8px 0 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,.25);
+}
+
+    /* 手機：卡片往上跳，避免擋住 */
+    @media (max-width: 560px){
+      .hotspot { width: 54px; height: 54px; }
+      .tooltip { left: -10px; top: -150px; min-width: 260px; max-width: 320px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>七股鳥類價值圖鑑_濕地篇</h1>
+    <p>滑鼠移到圓點看介紹；手機可點一下開/關。<br/>分辨技巧：先看「嘴型」→ 再看「頭型與體態」→ 最後看「顏色」</p>
+
+    <div class="pond" id="pond">
+
+      <!-- 1) 水鴨群（共用卡） -->
+      <div class="hotspot" style="left:30%; top:52%;" data-bird="水鴨群">
+        <div class="dot">群</div>
+        <div class="tooltip"style="left:36px; top:-20px;">
+          <div class="name">🦆 水鴨群（冬季常見）</div>
+          <div class="meta">
+            七股魚塭秋冬常見成群水鴨停留，可能包含琵嘴鴨、赤頸鴨、尖尾鴨等。<br/>
+            <b>覓食：</b>水面游動、低頭取食水生植物與小型無脊椎。<br/>
+            <b>生態價值：</b>維持水域平衡；大量停留代表食物充足、干擾較少，是濕地健康指標之一。
+          </div>
+          <div class="hint">想辨識到物種：請看旁邊三個「分辨卡」熱點，比對嘴型、頭型與體態。</div>
+          <div class="tag">🦆 冬候鳥</div>
+          <div class="tag">🍽 水面覓食</div>
+          <div class="tag">💧 健康指標</div>
+        </div>
+      </div>
+
+      <!-- 2) 琵嘴鴨（物種分辨卡） -->
+      <div class="hotspot" style="left:42%; top:70%;" data-bird="琵嘴鴨">
+        <div class="dot">琵</div>
+        <div class="tooltip" style="top:-300px;">
+          <div class="name">琵嘴鴨（Northern Shoveler）</div>
+
+          <img src="./shoveler.jpg" alt="琵嘴鴨外型特徵" class="bird-photo" />
+
+          <div class="meta">
+            <b>一眼特徵：</b>嘴巴寬扁像湯匙（像小鏟子）。<br/>
+            <b>觀察重點：</b>常在水面左右「掃水」濾食；頭常低、覓食動作很勤快。<br/>
+            <b>常見狀態：</b>冬季常見，常群聚在較平靜水面。
+          </div>
+          <div class="tag">🔍 看嘴：寬扁</div>
+          <div class="tag">🍽 掃水濾食</div>
+          <div class="tag">🦆 群聚常見</div>
+        </div>
+      </div>
+
+      <!-- 3) 赤頸鴨（物種分辨卡） -->
+      <div class="hotspot" style="left:60%; top:90%;" data-bird="赤頸鴨">
+        <div class="dot">赤</div>
+        <div class="tooltip" style="left:-180px; top:-400px;">
+          <div class="name">赤頸鴨（Common Pochard）</div>
+          <img src="./pochard.jpg" alt="赤頸鴨體型與頭部特徵" class="bird-photo" />
+          <div class="meta">
+            <b>一眼特徵：</b>體型偏厚實，常見「頭深色」＋「身體灰黑」的對比感（雄鳥更明顯）。<br/>
+            <b>觀察重點：</b>比較常做「潛水／半潛」覓食，不一定一直在水面掃食。<br/>
+            <b>分辨提醒：</b>遠距離先看「厚實體態＋色塊對比」，近一點再看頭形。
+          </div>
+          <div class="tag">🔍 看型：厚實</div>
+          <div class="tag">🍽 可能潛食</div>
+          <div class="tag">🧭 冬季常見</div>
+        </div>
+      </div>
+
+      <!-- 4) 尖尾鴨（物種分辨卡） -->
+      <div class="hotspot" style="left:80%; top:63%;" data-bird="尖尾鴨">
+        <div class="dot">尖</div>
+        <div class="tooltip" style="top:-140px; left:-440px;">
+          <div class="name">尖尾鴨（Northern Pintail）</div>
+          <img src="./pintail.jpg" alt="尖尾鴨修長體型與尾端" class="bird-photo" />
+          <div class="meta">
+            <b>一眼特徵：</b>身形修長、脖子看起來比較長；尾端常顯得「比較尖」。<br/>
+            <b>觀察重點：</b>在水面游動覓食，姿態較優雅修長；雄鳥尾更明顯。<br/>
+            <b>分辨提醒：</b>遠看先用「身形比例」判斷：修長 vs 厚實。
+          </div>
+          <div class="tag">🔍 看形：修長</div>
+          <div class="tag">🍽 水面覓食</div>
+          <div class="tag">🦆 尾端偏尖</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // 觸控裝置：點一下開 tooltip，再點空白關掉
+    const pond = document.getElementById("pond");
+    const hotspots = [...pond.querySelectorAll(".hotspot")];
+
+    function closeAll() {
+      hotspots.forEach(h => h.dataset.open = "0");
+    }
+
+    hotspots.forEach(h => {
+      h.dataset.open = "0";
+      h.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = h.dataset.open === "1";
+        closeAll();
+        h.dataset.open = isOpen ? "0" : "1";
+      });
+    });
+
+    document.addEventListener("click", closeAll);
+  </script>
+</body>
+</html>
